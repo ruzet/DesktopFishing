@@ -1,4 +1,11 @@
-[gd_scene format=4 uid="uid://d26bpx3ystspt"]
+[gd_scene format=3 uid="uid://d26bpx3ystspt"]
+
+[ext_resource type="Texture2D" uid="uid://cl28bc3ishvq8" path="res://Aseprite Files/Exports/Bridge.png" id="1_8etcy"]
+[ext_resource type="Texture2D" uid="uid://dgitd4i81yjmn" path="res://Assets/Window.png" id="2_frf35"]
+[ext_resource type="Texture2D" uid="uid://svfasss3iu7f" path="res://Aseprite Files/Exports/CappoIdle.png" id="3_321ql"]
+[ext_resource type="Texture2D" uid="uid://cf2ta4tndh6qg" path="res://Aseprite Files/Exports/CappoReel.png" id="4_d4f28"]
+[ext_resource type="Texture2D" uid="uid://bt233dmi7nohn" path="res://Aseprite Files/Exports/Bobber.png" id="4_ybmw1"]
+[ext_resource type="Texture2D" uid="uid://caqbism4h7ft7" path="res://Aseprite Files/Exports/CappoWindUp.png" id="5_iuea6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rq3qu"]
 bg_color = Color(0, 0.5254902, 0.5372549, 1)
@@ -8,67 +15,230 @@ bg_color = Color(0.7647059, 0.7647059, 0.7647059, 1)
 border_width_top = 2
 border_color = Color(1, 1, 1, 1)
 
-[sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_m8qwt"]
-_data = PackedByteArray("AAADAAUAAAABAAAAQAAAAEAAAAAgAQAAUklGRhgBAABXRUJQVlA4TAsBAAAvP8APEC9AmG00kZEP6Z4nR6RtMz4l03X//JBI22Z46uYf3sjnPwDAdv/MmACrtt26kcTARy2BXCPwEoVCGP5kYitO5/0X0f8JsP/qtgOg4pcaU189L8EhBWxraIqv/ALHLFhZvaElPvvwGscq2NLop5BC+AwvDZ05xBELt3eixgwv9YoWbp8Nv8ttQ0ihxRMv5WS+eNVGJRZPKm30is9eXssN1Mi+4tTArczIRWBmBlBrZJ/hZtaQ8JIxsp8CMzMOKag1MlMSPumSLjEyH+yjuC11ku6Yz4YUtzQy8VKjr9zMDMBqYxWTBn7P9fsYWrEpV/qaGr3iW0YlviSGKmzJir6iRq/5hlGLNwMA")
-size_override = Vector2(64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvfik"]
+atlas = ExtResource("4_d4f28")
+region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="Animation" id="Animation_yprpe"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_3bmkb"]
+atlas = ExtResource("4_d4f28")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_48eim"]
+atlas = ExtResource("5_iuea6")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_73a8k"]
+atlas = ExtResource("5_iuea6")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q8sds"]
+atlas = ExtResource("5_iuea6")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rq3qu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_321ql")
+}],
+"loop": 0,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kvfik")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3bmkb")
+}],
+"loop": 0,
+"name": &"Reel",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_48eim")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_73a8k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q8sds")
+}],
+"loop": 0,
+"name": &"Wind Up",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_muyn6"]
+radius = 1.0
+
+[sub_resource type="Animation" id="Animation_d4f28"]
 resource_name = "Idle"
-length = 0.1
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Cappo:frame")
+tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
-tracks/0/loop_wrap = false
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(-0.2),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Idle"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RodTip:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(15.813263, -18.072266)]
+}
 
-[sub_resource type="Animation" id="Animation_frf35"]
-resource_name = "Reel"
-length = 0.2
-loop_mode = 1
+[sub_resource type="Animation" id="Animation_iuea6"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Cappo:frame")
+tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
-tracks/0/loop_wrap = false
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Idle"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RodTip:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(15.813263, -18.072266)]
+}
+
+[sub_resource type="Animation" id="Animation_3bmkb"]
+resource_name = "Reel"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Reel"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06666667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [0, 1]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RodTip:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.06666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(4.5180817, -27.861446), Vector2(27.108442, -21.837349)]
+}
 
-[sub_resource type="Animation" id="Animation_8etcy"]
+[sub_resource type="Animation" id="Animation_kvfik"]
 resource_name = "Wind Up"
-length = 0.30000000000000004
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Cappo:frame")
+tracks/0/path = NodePath(".:animation")
 tracks/0/interp = 1
-tracks/0/loop_wrap = false
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Wind Up"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.76666665),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [0, 1, 2]
 }
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_frf35"]
-_data = {
-&"Idle": SubResource("Animation_yprpe"),
-&"Reel": SubResource("Animation_frf35"),
-&"Wind Up": SubResource("Animation_8etcy")
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RodTip:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.7666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2(15.813263, -18.072266), Vector2(4.5180817, -27.861446), Vector2(-15.813244, -21.084337)]
 }
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kvfik"]
+_data = {
+&"Idle": SubResource("Animation_d4f28"),
+&"RESET": SubResource("Animation_iuea6"),
+&"Reel": SubResource("Animation_3bmkb"),
+&"Wind Up": SubResource("Animation_kvfik")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rq3qu"]
 
 [node name="Node2D" type="Node2D" unique_id=1922882268]
 
@@ -90,42 +260,85 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_rq3qu")
 
+[node name="Window" type="NinePatchRect" parent="Desktop/Root" unique_id=559126642]
+layout_mode = 0
+offset_left = 246.0
+offset_top = 180.0
+offset_right = 681.0
+offset_bottom = 489.0
+texture = ExtResource("2_frf35")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 8
+patch_margin_top = 21
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="Bridge" type="TextureRect" parent="Desktop/Root" unique_id=1474801851]
+modulate = Color(1, 1, 1, 0.38039216)
+layout_mode = 0
+offset_top = 268.0
+offset_right = 477.0
+offset_bottom = 560.0
+texture = ExtResource("1_8etcy")
+
 [node name="Taskbar" type="Panel" parent="Desktop/Root" unique_id=2145880897]
 layout_mode = 0
+offset_left = 3.0517578e-05
 offset_top = 560.0
 offset_right = 800.0
 offset_bottom = 600.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_muyn6")
 
-[node name="Cappo" type="Sprite2D" parent="." unique_id=1491818991]
-visible = false
-texture_filter = 1
-texture = SubResource("PortableCompressedTexture2D_m8qwt")
+[node name="Cappo" type="AnimatedSprite2D" parent="Desktop/Root" unique_id=1259837316]
+position = Vector2(318, 379)
+scale = Vector2(1.328, 1.328)
+sprite_frames = SubResource("SpriteFrames_rq3qu")
+animation = &"Idle"
 metadata/_aseprite_wizard_interface_config_ = {
-"layer_section": false,
-"output_section": false,
-"pending_changes": {}
-}
-metadata/_aseprite_wizard_config_ = {
-"convert_fps_field": 60.0,
-"convert_ms_field": 16.0,
-"convert_to_fps": false,
+"animation_section": false,
+"pending_changes": {
 "embed_tex": true,
-"i_mode": 0,
-"keep_anim_length": false,
 "layers": [],
 "o_ex_p": "",
 "o_folder": "",
 "o_name": "",
 "only_visible": false,
-"player": "Sprite2D/AnimationPlayer",
 "scale": "1.0",
+"should_round_fps": true,
 "slice": "",
-"source": "res://Aseprite Files/CappoIdle.aseprite",
-"source_uid": 8920624715969511842
+"source": "",
+"source_uid": -1
 }
-metadata/_aseprite_wizard_source_file_hash_ = "6910b06ee201b9616f6c0e55c7b088b9"
+}
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Cappo" unique_id=879468077]
-root_node = NodePath("../..")
-libraries/ = SubResource("AnimationLibrary_frf35")
+[node name="RodTip" type="Marker2D" parent="Desktop/Root/Cappo" unique_id=1119317801]
+position = Vector2(15.813263, -18.072266)
+scale = Vector2(1.000094, 1.000094)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Desktop/Root/Cappo/RodTip" unique_id=265042903]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Desktop/Root/Cappo/RodTip/StaticBody2D" unique_id=1291177909]
+position = Vector2(0, -2.2977943e-05)
+shape = SubResource("CircleShape2D_muyn6")
+
+[node name="RodLine" type="DampedSpringJoint2D" parent="Desktop/Root/Cappo" unique_id=2067360629]
+visible = false
+position = Vector2(15.813262, -18.07229)
+scale = Vector2(1.0000939, 1.0000939)
+node_a = NodePath("../RodTip/StaticBody2D")
+node_b = NodePath("../../Bobber")
+length = 800.0
+stiffness = 0.8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Desktop/Root/Cappo" unique_id=228904154]
+libraries/ = SubResource("AnimationLibrary_kvfik")
+
+[node name="Bobber" type="RigidBody2D" parent="Desktop/Root" unique_id=1135573493]
+linear_damp = 1.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Desktop/Root/Bobber" unique_id=886614201]
+shape = SubResource("CircleShape2D_rq3qu")
+
+[node name="Sprite2D" type="Sprite2D" parent="Desktop/Root/Bobber" unique_id=1041959228]
+scale = Vector2(0.59375, 0.59375)
+texture = ExtResource("4_ybmw1")
