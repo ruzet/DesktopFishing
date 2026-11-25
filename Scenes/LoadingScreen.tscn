@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://c4vbvssetple2"]
+
+[ext_resource type="Script" uid="uid://tw5537dqnkwr" path="res://Scripts/LoadingScreen.gd" id="1_dhqi2"]
+[ext_resource type="Texture2D" uid="uid://bwoxuegu1qxsl" path="res://Aseprite Files/Exports/LoadingScreen.png" id="1_ghsbh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_83bai"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="LoadingScreen" type="Control" unique_id=29986596]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dhqi2")
+
+[node name="Image" type="TextureRect" parent="." unique_id=162719130]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ghsbh")
+
+[node name="Cover" type="Panel" parent="." unique_id=1632770941]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_83bai")
