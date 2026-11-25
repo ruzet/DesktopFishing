@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://d0dhnd6u4qk0y"
+path="res://.godot/imported/CappoIdle.aseprite-7b913ae447e0c31db28441ae22e13ecf.res"
+
+[deps]
+
+source_file="res://Aseprite Files/CappoIdle.aseprite"
+dest_files=["res://.godot/imported/CappoIdle.aseprite-7b913ae447e0c31db28441ae22e13ecf.res"]
+
+[params]
+
