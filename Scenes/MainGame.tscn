@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cl28bc3ishvq8" path="res://Aseprite Files/Exports/Bridge.png" id="1_8etcy"]
 [ext_resource type="Texture2D" uid="uid://dgitd4i81yjmn" path="res://Assets/Window.png" id="2_frf35"]
 [ext_resource type="Texture2D" uid="uid://svfasss3iu7f" path="res://Aseprite Files/Exports/CappoIdle.png" id="3_321ql"]
+[ext_resource type="Script" uid="uid://jyq3024nuv47" path="res://Scripts/Cappo.gd" id="3_yprpe"]
 [ext_resource type="Texture2D" uid="uid://cf2ta4tndh6qg" path="res://Aseprite Files/Exports/CappoReel.png" id="4_d4f28"]
 [ext_resource type="Texture2D" uid="uid://bt233dmi7nohn" path="res://Aseprite Files/Exports/Bobber.png" id="4_ybmw1"]
 [ext_resource type="Texture2D" uid="uid://caqbism4h7ft7" path="res://Aseprite Files/Exports/CappoWindUp.png" id="5_iuea6"]
@@ -239,6 +240,10 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rq3qu"]
+radius = 5.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rq3qu"]
+size = Vector2(440, 50)
 
 [node name="Node2D" type="Node2D" unique_id=1922882268]
 
@@ -264,8 +269,8 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_rq3qu")
 layout_mode = 0
 offset_left = 246.0
 offset_top = 180.0
-offset_right = 681.0
-offset_bottom = 489.0
+offset_right = 696.0
+offset_bottom = 480.0
 texture = ExtResource("2_frf35")
 region_rect = Rect2(0, 0, 32, 32)
 patch_margin_left = 8
@@ -294,6 +299,7 @@ position = Vector2(318, 379)
 scale = Vector2(1.328, 1.328)
 sprite_frames = SubResource("SpriteFrames_rq3qu")
 animation = &"Idle"
+script = ExtResource("3_yprpe")
 metadata/_aseprite_wizard_interface_config_ = {
 "animation_section": false,
 "pending_changes": {
@@ -322,23 +328,33 @@ position = Vector2(0, -2.2977943e-05)
 shape = SubResource("CircleShape2D_muyn6")
 
 [node name="RodLine" type="DampedSpringJoint2D" parent="Desktop/Root/Cappo" unique_id=2067360629]
+unique_name_in_owner = true
 visible = false
-position = Vector2(15.813262, -18.07229)
+position = Vector2(27.108442, -21.83735)
 scale = Vector2(1.0000939, 1.0000939)
 node_a = NodePath("../RodTip/StaticBody2D")
 node_b = NodePath("../../Bobber")
-length = 800.0
-stiffness = 0.8
+length = 100.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Desktop/Root/Cappo" unique_id=228904154]
 libraries/ = SubResource("AnimationLibrary_kvfik")
 
 [node name="Bobber" type="RigidBody2D" parent="Desktop/Root" unique_id=1135573493]
+unique_name_in_owner = true
+visible = false
+position = Vector2(361, 378)
 linear_damp = 1.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Desktop/Root/Bobber" unique_id=886614201]
 shape = SubResource("CircleShape2D_rq3qu")
 
 [node name="Sprite2D" type="Sprite2D" parent="Desktop/Root/Bobber" unique_id=1041959228]
-scale = Vector2(0.59375, 0.59375)
+scale = Vector2(0.3, 0.3)
 texture = ExtResource("4_ybmw1")
+
+[node name="WaterArea" type="Area2D" parent="Desktop/Root" unique_id=1537866919]
+unique_name_in_owner = true
+position = Vector2(471, 450)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Desktop/Root/WaterArea" unique_id=1902275674]
+shape = SubResource("RectangleShape2D_rq3qu")
