@@ -1,8 +1,10 @@
 extends AnimatedSprite2D
 
-enum State{Idle, Casting, Fishing, Reeling}
+enum State {Idle, Casting, Fishing, Reeling}
 @onready var Bobber: RigidBody2D = %Bobber
 @onready var Water: Area2D = %WaterArea
+@onready var ReelWindow: NinePatchRect = %ReelWindow
+@onready var ReelWindowRestraint: Control = %ReelWindowRestraint
 @onready var RodLine: DampedSpringJoint2D = %RodLine
 @onready var RodLineVisual: Line2D = %RodLineVisual
 @onready var RodTip: Marker2D = $"RodTip"
@@ -11,10 +13,13 @@ enum State{Idle, Casting, Fishing, Reeling}
 var CurrentState: State = State.Idle
 var FishingProgress = 0
 var StartedCount = false
+var ReelButtonOnScreen = false
+var RNG: RandomNumberGenerator = RandomNumberGenerator.new()
 
 func _ready() -> void:
 	Water.body_entered.connect(_BobberEntersWater)
 	Water.body_exited.connect(_BobberLeavesWater)
+	ReelWindow.find_child("ReelButton").pressed.connect(_ReelButtonPressed)
 
 func _input(Event: InputEvent) -> void:
 	if Event.is_action_pressed("Fish"):
@@ -30,16 +35,32 @@ func _process(Delta: float) -> void:
 		Bobber.global_position = RodTip.global_position
 		RodLine.rest_length = Bobber.global_position.distance_to(RodTip.global_position)
 	elif CurrentState == State.Reeling:
-		print("reeling")
 		AnimPlayer.current_animation = "Reeling"
 		if !AnimPlayer.is_playing(): AnimPlayer.play()
-		
-		AnimPlayer.speed_scale = remap(FishingProgress, 0, 100, 3, 0.3)
+
+		_RandomizeReelButton(true)
+		AnimPlayer.speed_scale = remap(FishingProgress, 0, 100, 5, 0.2)
 		FishingProgress -= Delta * 5
 		if FishingProgress < 0:
 			_ReturnToIdle()
 		elif FishingProgress > 100:
 			_ReturnToIdle()
+
+func _ReelButtonPressed():
+	if CurrentState == State.Reeling && ReelButtonOnScreen:
+		FishingProgress += 15
+		ReelWindow.global_position = Vector2(-161.0, 244)
+		ReelButtonOnScreen = false
+
+func _RandomizeReelButton(Randomize: bool):
+	if !ReelButtonOnScreen:
+		if !Randomize || RNG.randi_range(1, 5) == 1:
+			ReelButtonOnScreen = true
+			var XRandomnessSize = round(ReelWindowRestraint.size.x)
+			var YRandomnessSize = round(ReelWindowRestraint.size.y)
+			ReelWindow.global_position = Vector2(
+				ReelWindowRestraint.global_position.x + RNG.randi_range(-XRandomnessSize, XRandomnessSize),
+				ReelWindowRestraint.global_position.y + RNG.randi_range(-YRandomnessSize, YRandomnessSize))
 
 func _BobberEntersWater(Body: Node):
 	if Body == Bobber:
@@ -48,7 +69,7 @@ func _BobberEntersWater(Body: Node):
 
 		if CurrentState == State.Fishing && !StartedCount:
 			StartedCount = true
-			var RandomTime = 1#RandomNumberGenerator.new().randf_range(3.0, 7.0)
+			var RandomTime = 0 # RNG.new().randf_range(3.0, 7.0)
 			for i in 700:
 				i += 1
 				await get_tree().create_timer(0.01).timeout
@@ -83,5 +104,4 @@ func _CastLine():
 
 func _FishingMinigame():
 	StartedCount = false
-
-	
+	_RandomizeReelButton(false)
