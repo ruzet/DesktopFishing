@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://tw5537dqnkwr" path="res://Scripts/LoadingScreen.gd" id="1_dhqi2"]
 [ext_resource type="Texture2D" uid="uid://bwoxuegu1qxsl" path="res://Aseprite Files/Exports/LoadingScreen.png" id="1_ghsbh"]
+[ext_resource type="AudioStream" uid="uid://cw8hx6g6g7lry" path="res://Assets/The Microsoft Sound.wav" id="3_m6rkq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_83bai"]
 bg_color = Color(0, 0, 0, 1)
@@ -32,3 +33,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_83bai")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=196937677]
+stream = ExtResource("3_m6rkq")

@@ -46,6 +46,10 @@ func _process(Delta: float) -> void:
 		elif FishingProgress > 100:
 			_ReturnToIdle()
 
+			if ReelButtonOnScreen:
+				ReelWindow.global_position = Vector2(-161.0, 244)
+				ReelButtonOnScreen = false
+
 func _ReelButtonPressed():
 	if CurrentState == State.Reeling && ReelButtonOnScreen:
 		FishingProgress += 15

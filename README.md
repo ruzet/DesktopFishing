@@ -1,2 +1,3 @@
 # DesktopFishing
-A game about fishing in Windows 98!
+
+A game about fishing in Windows 95!
